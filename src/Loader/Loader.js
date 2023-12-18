@@ -4,7 +4,7 @@ import PageLoader from './PageLoader';
 
 function Loader(){
     return(
-        <div>
+        <div  className='container_loader'>
             <PageLoader />
         </div>
     )
