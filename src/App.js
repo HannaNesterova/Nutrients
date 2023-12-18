@@ -6,11 +6,6 @@ import Loader from './Loader/Loader';
 import Nutrition from './Nutrition';
 
 //https://api.edamam.com/api/nutrition-details?app_id=6b048013&app_key=1515f87458abc59e82c5b37853ead8e6
-//1 show totalNutrients
-//2 alert if there is a mistake 
-//3 loader after button is clicked
-//4 style + RWD
-
 
 function App() {
 
@@ -23,7 +18,7 @@ function App() {
   const MY_ID = '6b048013';
   const MY_URL = 'https://api.edamam.com/api/nutrition-details';
 
-  const fetchData = async (ingr) => { 
+  const analyzeNutrition = async (ingr) => { 
     setLoader(true);
 
       const response = await fetch(`${MY_URL}?app_id=${MY_ID}&app_key=${MY_KEY}`,{
@@ -59,15 +54,16 @@ function App() {
   }
    useEffect(()=> {
      if(wordSubmitted !== ''){
-       let ingr = wordSubmitted.split(/[,,;,\n,\r]/);
-       fetchData(ingr); 
-     }
+       let ingr = wordSubmitted ? wordSubmitted.split(/[,,;,\n,\r]/) : [];
+       analyzeNutrition(ingr); 
+     } 
    },[wordSubmitted])
 
   return (
     <div>
     <h1>Nutrition Analysis</h1>
       {loader && <Loader />}
+      
 
       <input type='text' placeholder='Type your ingredient...' onChange={myNutritionSearch}/>
       <button  onClick={finalSearch}>Look for</button>
